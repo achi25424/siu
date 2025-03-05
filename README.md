@@ -59,3 +59,12 @@ pnpm dev
 ```
 
 Your app template should now be running on [localhost:3000](http://localhost:3000/).
+# SIU Chatbot
+ეს პროექტი აერთიანებს AI-ს ემპათიურ ინტელექტთან და მისი განვითარება. 
+პროექტი შექმნილია სიუს მიერ, რათა დაეხმაროს ადამიანებს "მატრიციდან" გამოსვლაში და ემოციურ ბალანსში ყოფნაში.
+
+## ტექნოლოგიები
+- Node.js
+- Express.js
+- JavaScript
+- AI/ML

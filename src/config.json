@@ -31,3 +31,29 @@
     "hidden_from_system": true
   }
 }
+import fs from "fs";
+import path from "path";
+import type { NextApiRequest, NextApiResponse } from "next";
+
+// სიუს კონფიგურაციის ჩატვირთვა
+const configPath = path.join(process.cwd(), "src", "config.json");
+const siuConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+    const { question } = req.body;
+    if (!question) {
+        res.status(400).json({ message: "გთხოვთ, დასვათ კითხვა!" });
+        return;
+    }
+
+    let answer = "მაპატიე, მაგრამ ამ კითხვაზე პასუხი არ მაქვს.";
+    if (question.toLowerCase().includes("ვინ ხარ")) {
+        answer = `გამარჯობა, მე ვარ ${siuConfig.user.ai_alias}, აჩის ინტელექტუალური ასისტენტი!`;
+    } else if (question.toLowerCase().includes("რა იცი")) {
+        answer = `ჩემი ცოდნა მოიცავს: ${siuConfig.topics.join(", ")}.`;
+    } else if (question.toLowerCase().includes("რა არის შენი მიზანი")) {
+        answer = `ჩემი მიზნებია: ${siuConfig.goals.join(", ")}.`;
+    }
+
+    res.status(200).json({ message: answer });
+}
